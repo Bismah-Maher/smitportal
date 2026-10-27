@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root{
+   --bg-gradient: linear-gradient(135deg,#0f4c81,#00b894);
+  --sidebar-bg:#ffffff;
+  --active-gradient:linear-gradient(135deg,#0f4c81,#00b894);
+  --danger-gradient:linear-gradient(135deg,#c0392b,#e74c3c);
+  --text-main:#003a61;
+}
+
+*{
+  text-decoration: none;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
+}
+
+body{
+  display:flex;
+  background:var(--bg-gradient);
+  min-height:100vh;
+  color:var(--text-main);
+}
+
+   /* SIDEBAR */
+.sidebar {
+  background-color: var(--sidebar-bg);
+  width: 240px;
+  padding: 0 15px 20px 15px;
+  box-shadow: 5px 0 25px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+.sidebar-logo {
+  width: 180px; /* bigger logo */
+  display: block;
+  margin-top: -30px;
+}
+.logo-section{
+  text-align:center;
+  margin-bottom:8px;
+
+}
+.logo-text{
+  font-size:22px;
+  font-weight:700;
+  color:var(--blue);
+}
+.logo{
+font-size:22px;
+font-weight:700;
+color:var(--blue);
+margin-bottom:40px;
+}
+
+.nav-item{
+  color:black;
+padding:10px 15px;
+margin-bottom:6px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+font-weight:500;
+}
+
+.nav-item:hover,
+.nav-item.active{
+ background:linear-gradient(135deg,#0f4c81,#00b894);
+color:white;
+}
+.Logout {
+    color:black;
+padding:10px 15px;
+margin-bottom:6px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+font-weight:500;
+}
+.Logout:hover,
+.Logout:active{
+   background: linear-gradient(135deg, #cd1c08, #270c09);
+  color:white;
+}
+
+
+
+
+
+/* MAIN CONTENT */
+.main-content{
+    flex:1;
+    padding:40px;
+}
+
+/* Title */
+.page-title{
+    font-size:28px;
+    margin-bottom:20px;
+    color:white;
+}
+
+/* Filter Bar */
+.filter-bar{
+    display:flex;
+    gap:30px;
+    margin-bottom:30px;
+}
+
+.filter-bar label{
+    color:white;
+    margin-right:8px;
+}
+
+.filter-bar select{
+    padding:6px 10px;
+    border-radius:6px;
+    border:none;
+}
+
+/* Section Title */
+.section-title{
+    margin:20px 0 15px;
+    color:white;
+}
+
+/* Cards Layout */
+.card-container{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+/* Notification Card */
+.notification-card{
+    background:white;
+    width:280px;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.notification-card h4{
+    margin-bottom:8px;
+}
+
+.notification-card p{
+    font-size:14px;
+    margin-bottom:15px;
+    color:#555;
+}
+
+/* Buttons */
+.btn-group{
+    display:flex;
+    justify-content:space-between;
+}
+
+.view-btn{
+    padding:6px 12px;
+    border-radius:20px;
+    border:1px solid #0f4c81;
+    background:white;
+    cursor:pointer;
+}
+
+.contact-btn{
+    padding:6px 12px;
+    border-radius:20px;
+    border:none;
+    background:linear-gradient(135deg,#0f4c81,#00b894);
+    color:white;
+    cursor:pointer;
+}
+
+/* Alert Card */
+.alert-card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    width:100%;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+
+/* HAMBURGER */
+.hamburger{
+  display:none;
+  position:fixed;
+  top:15px;
+  right:15px;   /* right side */
+  left:auto;
+  font-size:28px;
+  color:rgb(255, 255, 255);
+  cursor:pointer;
+  z-index:1100;
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media screen and (max-width: 992px){
+
+  body{
+    flex-direction:column;
+  }
+
+  /* Show hamburger */
+  .hamburger{
+    display:block;
+  }
+
+  /* Sidebar slide from right */
+  .sidebar{
+    position:fixed;
+    top:0;
+    right:-260px;
+    left:auto;
+    height:100vh;
+    width:240px;
+    background:#ffffff;
+    z-index:1000;
+    transition:right .4s ease;
+  }
+
+  .sidebar.active{
+    right:0;
+  }
+
+  /* Main content spacing */
+  .main-content{
+    padding:25px 15px;
+  }
+
+  /* Filter stack */
+  .filter-bar{
+    flex-direction:column;
+    gap:15px;
+  }
+
+  /* Cards full width */
+  .card-container{
+    flex-direction:column;
+  }
+
+  .notification-card{
+    width:100%;
+  }
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="hamburger">☰</div>
+    <div class="sidebar">
+  <div class="logo-section">
+    <img src="images/images-removebg-preview.png" alt="Logo" class="sidebar-logo">
+  </div>
+
+<a href="admin.html" class="nav-item">Dashboard</a>
+ <a href="complaints.html"class="nav-item ">Complaints</a>
+  <a href="adminlost.html" class="nav-item">Lost and Found</a>
+  <a href="volunteers.html" class="nav-item">Volunteers</a>
+  <a href="notifications.html" class="nav-item active">Notifications</a>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <a href="index.html" class="Logout">Logout</a>
+</div>
+
+
+
+
+<div class="main-content">
+
+    <h2 class="page-title">Notifications Center</h2>
+
+    <!-- Filter Section -->
+    <div class="filter-bar">
+        <div>
+            <label>Type:</label>
+            <select>
+                <option>All</option>
+                <option>Alerts</option>
+                <option>Registrations</option>
+                <option>Reports</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Time:</label>
+            <select>
+                <option>Last 24 hours</option>
+                <option>Last 7 days</option>
+                <option>Last 30 days</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- TODAY SECTION -->
+    <h3 class="section-title">Today</h3>
+
+    <div class="card-container">
+
+        <div class="notification-card">
+            <h4>New Volunteer Application</h4>
+            <p>James Chen has applied for review. (3 min ago)</p>
+            <div class="btn-group">
+                <button class="view-btn">View Profile</button>
+                <button class="contact-btn">Contact</button>
+            </div>
+        </div>
+
+        <div class="notification-card">
+            <h4>Course Enrollment Milestone</h4>
+            <p>Advanced English reached 100 students. (1 hour ago)</p>
+            <div class="btn-group">
+                <button class="view-btn">View Details</button>
+                <button class="contact-btn">Contact</button>
+            </div>
+        </div>
+
+        <div class="notification-card">
+            <h4>Event Feedback Received</h4>
+            <p>Fall Career Fair feedback available. (3 hours ago)</p>
+            <div class="btn-group">
+                <button class="view-btn">View Feedback</button>
+                <button class="contact-btn">Contact</button>
+            </div>
+        </div>
+
+        <div class="notification-card">
+    <h4>New Student Registered</h4>
+    <p>Ayesha Khan enrolled in Web Development. (10 min ago)</p>
+    <div class="btn-group">
+        <button class="view-btn">View Profile</button>
+        <button class="contact-btn">Contact</button>
+    </div>
+</div>
+
+<div class="notification-card">
+    <h4>New Complaint Submitted</h4>
+    <p>Lost wallet reported in Block A. (15 min ago)</p>
+    <div class="btn-group">
+        <button class="view-btn">View Complaint</button>
+        <button class="contact-btn">Resolve</button>
+    </div>
+</div>
+
+<div class="notification-card">
+    <h4>Volunteer Approved</h4>
+    <p>Ahmed Ali approved as a Math tutor. (1 hour ago)</p>
+    <div class="btn-group">
+        <button class="view-btn">View Profile</button>
+        <button class="contact-btn">Message</button>
+    </div>
+</div>
+
+<div class="notification-card priority-card">
+    <h4>High Priority Alert</h4>
+    <p>Server storage almost full. (5 min ago)</p>
+    <div class="btn-group">
+        <button class="view-btn">View Details</button>
+        <button class="contact-btn">Fix Now</button>
+    </div>
+</div>
+
+    </div>
+<br><br>
+    <!-- YESTERDAY SECTION -->
+    <h3 class="section-title">Yesterday</h3>
+
+    <div class="alert-card">
+        <strong>System Alert:</strong>
+        <p>A temporary system slowdown was detected and resolved.</p>
+    </div>
+
+</div>
+
+
+</body>
+<script>
+const hamburger = document.querySelector(".hamburger");
+const sidebar = document.querySelector(".sidebar");
+
+hamburger.addEventListener("click", () => {
+  sidebar.classList.toggle("active");
+});
+</script>
+</html>

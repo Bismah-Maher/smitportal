@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+        /* Colors extracted from Image 1 */
+        --bg-gradient: linear-gradient(135deg, #005a8d 0%, #3e9a53 50%, #68b131 100%);
+        --sidebar-bg: #ffffff;
+        --sidebar-text: #6a2c91; /* Purple from Image 1 sidebar */
+        --active-gradient: linear-gradient(90deg, #005a8d, #68b131);
+        --text-main: #003a61;
+        --border-color: #eef2f6;
+        --card-white: #ffffff;
+      }
+
+      * {
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        display: flex;
+         background:linear-gradient(135deg,#0f4c81,#00b894);
+        background-attachment: fixed;
+        color: var(--text-main);
+        min-height: 100vh;
+      }
+
+      /* SIDEBAR */
+.sidebar {
+  background-color: var(--sidebar-bg);
+  width: 240px;
+  padding: 0 15px 20px 15px;
+  box-shadow: 5px 0 25px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+.sidebar-logo {
+  width: 180px; /* bigger logo */
+  display: block;
+  margin-top: -30px;
+}
+.logo-section{
+  text-align:center;
+  margin-bottom:8px;
+
+}
+.logo-text{
+  font-size:22px;
+  font-weight:700;
+  color:var(--blue);
+}
+.logo{
+font-size:22px;
+font-weight:700;
+color:var(--blue);
+margin-bottom:40px;
+}
+
+.nav-item{
+  color:black;
+padding:10px 15px;
+margin-bottom:6px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+font-weight:500;
+}
+
+.nav-item:hover,
+.nav-item.active{
+ background:linear-gradient(135deg,#0f4c81,#00b894);
+color:white;
+}
+.Logout {
+    color:black;
+padding:10px 15px;
+margin-bottom:6px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+font-weight:500;
+}
+.Logout:hover,
+.Logout:active{
+   background: linear-gradient(135deg, #cd1c08, #270c09);
+  color:white;
+}
+
+
+
+
+
+/* MAIN CONTENT */
+.main-content{
+    flex: 1;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floating animated background circles */
+.main-content::before,
+.main-content::after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    animation: float 8s ease-in-out infinite alternate;
+}
+
+.main-content::before{
+    width: 300px;
+    height: 300px;
+    background: #ffffff;
+    top: 10%;
+    left: 15%;
+}
+
+.main-content::after{
+    width: 250px;
+    height: 250px;
+    background: #00ffcc;
+    bottom: 10%;
+    right: 10%;
+    animation-delay: 2s;
+}
+
+@keyframes float{
+    from{ transform: translateY(0px); }
+    to{ transform: translateY(40px); }
+}
+
+/* HEADING */
+.page-title{
+    color: white;
+    font-size: 38px;
+    margin-bottom: 60px;
+    text-align: center;
+    animation: fadeSlideDown 1s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeSlideDown{
+    from{
+        opacity:0;
+        transform: translateY(-30px);
+    }
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* RESPONSIVE DESIGN FOR LEARN PAGE */
+
+@media screen and (max-width: 1024px) {
+    .card-container {
+        gap: 30px; /* Tighten gap for tablets */
+    }
+    
+    .book-card {
+        width: 45%; /* Let cards sit side-by-side on medium screens */
+        padding: 40px 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        flex-direction: column; /* Move sidebar to top */
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Remove the large vertical spacing in sidebar for mobile */
+    .sidebar br {
+        display: none;
+    }
+
+    .sidebar-logo {
+        margin: 0 auto;
+        margin-top: 0;
+        width: 130px;
+    }
+
+    .main-content {
+        padding: 40px 20px;
+    }
+
+    .page-title {
+        font-size: 28px;
+        margin-bottom: 40px;
+    }
+
+    .book-card {
+        width: 100%; /* Full width cards */
+        min-height: auto;
+        padding: 40px 25px;
+    }
+
+    /* Adjust floating background circles so they don't cause overflow */
+    .main-content::before {
+        width: 150px;
+        height: 150px;
+        left: -50px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .page-title {
+        font-size: 24px;
+    }
+
+    .book-card h2 {
+        font-size: 26px;
+    }
+
+    .book-card p {
+        font-size: 16px;
+    }
+
+    .open-btn {
+        width: 100%; /* Make button easy to tap */
+        text-align: center;
+    }
+}
+
+/* CARD CONTAINER */
+.card-container{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+/* BOOK CARD */
+.book-card{
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    
+    width: 500px;              /* Bigger width */
+    min-height: 320px;         /* Taller card */
+    padding: 60px 50px;        /* More inner spacing */
+    
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    transition: all 0.4s ease;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 1s ease forwards;
+    opacity: 0;
+}
+
+/* Delay second card animation */
+.book-card:nth-child(2){
+    animation-delay: 0.3s;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform: translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover effect */
+.book-card:hover{
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 20px 60px rgb(0, 0, 0);
+}
+
+/* Card title */
+.book-card h2{
+    font-size: 32px;   /* Bigger title */
+    margin-bottom: 20px;
+    color: white;
+}
+
+.book-card p{
+    font-size: 18px;   /* Bigger description */
+    margin-bottom: 35px;
+    color: #f1f1f1;
+}
+
+/* Animated Button */
+.open-btn{
+    display: inline-block;
+    padding: 15px 35px;   /* Bigger button */
+    font-size: 16px;
+    border-radius: 35px;
+    background: linear-gradient(135deg,#0f4c81,#00b894);
+    color: white;
+    font-weight: 600;
+    transition: 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.open-btn::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:-100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    transition:0.5s;
+}
+
+.open-btn:hover::before{
+    left:100%;
+}
+
+.open-btn:hover{
+    transform: scale(1.08);
+}
+
+
+
+
+/* HAMBURGER */
+.hamburger{
+  display:none;
+  position:fixed;
+  top:15px;
+  left:15px;
+  font-size:28px;
+  color:white;
+  cursor:pointer;
+  z-index:1001;
+}
+
+/* MOBILE RESPONSIVE */
+@media screen and (max-width: 992px){
+
+  body{
+    flex-direction: column;
+  }
+
+  .hamburger{
+    display:block;
+  }
+
+  .sidebar{
+    position: fixed;
+    top:0;
+    left:-260px;
+    height:100vh;
+    width:240px;
+    z-index:1000;
+    transition: left 0.4s ease;
+  }
+
+  .sidebar.active{
+    left:0;
+  }
+
+  .main-content{
+    padding: 40px 20px;
+  }
+
+  .card-container{
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .book-card{
+    width: 100%;
+    min-height: auto;
+    padding: 40px 25px;
+  }
+
+  /* Remove vertical spacing in sidebar for mobile */
+  .sidebar br{
+    display: none;
+  }
+
+  .sidebar-logo{
+    width: 130px;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="hamburger">☰</div>
+<div class="sidebar">
+  <div class="logo-section">
+    <img src="images/images-removebg-preview.png" alt="Logo" class="sidebar-logo">
+  </div>
+
+<a href="student.html" class="nav-item">Dashboard</a>
+<a href="quiz.html" class="nav-item ">Quiz</a>
+  <a href="lost.html" class="nav-item">Lost and Found</a>
+  <a href="complainstudent.html" class="nav-item">Complaints</a>
+  <a href="learn.html"class="nav-item active">Learn</a>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <a href="index.html" class="Logout">Logout</a>
+</div>
+
+
+
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+    <h1 class="page-title">Books of HTML, CSS & JavaScript</h1>
+
+    <div class="card-container">
+
+        <!-- HTML & CSS Book -->
+        <div class="book-card">
+    <h2>📘 HTML & CSS</h2>
+    <p>An easy and practical guide to learning web design.
+Understand HTML structure and CSS styling step by step.
+Perfect for building a strong foundation in front-end development.</p>
+    <a href="book/htmlandcssbook-sample.pdf" target="_blank" class="open-btn">Open Book</a>
+</div>
+
+<div class="book-card">
+    <h2>⚡ JavaScript</h2>
+    <p>A simple and structured way to learn JavaScript concepts.
+Improve your logic and problem-solving skills with real examples.
+Ideal for making your websites interactive and dynamic.</p>
+    <a href="book/smart-way-to-learn-javascript.pdf" target="_blank" class="open-btn">Open Book</a>
+</div>
+
+    </div>
+
+</div>
+</body>
+
+<script>
+const hamburger = document.querySelector(".hamburger");
+const sidebar = document.querySelector(".sidebar");
+
+hamburger.addEventListener("click", () => {
+  sidebar.classList.toggle("active");
+});
+</script>
+</html>
+
+
+

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saylani QA Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+
+--green:#66b032;
+    --blue:#0057a8;
+    --white:#ffffff;
+    --light:#f4f8fb;
+}
+
+*{
+  font-family:sans-serif;
+  text-decoration:none;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100%;
+background:linear-gradient(135deg,var(--blue),var(--green));
+display:flex;
+min-height:100vh;
+}
+
+
+
+.student-info{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.student-name{
+  font-weight:600;
+  color:var(--blue);
+}
+
+.profile-pic{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--green);
+}
+
+
+/* SIDEBAR */
+.sidebar{
+  width:240px;
+  background:var(--white);
+  padding:0 15px 20px 15px; /* this is already no top padding, so good! */
+  box-shadow:5px 0 25px rgba(0,0,0,0.08);
+  display:flex;
+  flex-direction:column;
+  align-self:stretch;
+}
+.sidebar-logo {
+  width: 180px; /* bigger logo */
+  display: block;
+  margin-top: -30px;
+}
+.logo-section{
+  text-align:center;
+  margin-bottom:8px;
+
+}
+.logo-text{
+  font-size:22px;
+  font-weight:700;
+  color:var(--blue);
+}
+.logo{
+font-size:22px;
+font-weight:700;
+color:var(--blue);
+margin-bottom:40px;
+}
+
+.nav-item{
+  color:black;
+padding:10px 15px;
+margin-bottom:6px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+font-weight:500;
+}
+
+.nav-item:hover,
+.nav-item.active{
+ background:linear-gradient(135deg,#0f4c81,#00b894);
+color:white;
+}
+
+.Logout {
+    color:black;
+padding:10px 15px;
+margin-bottom:6px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+font-weight:500;
+}
+.Logout:hover,
+.Logout:active{
+   background: linear-gradient(135deg, #cd1c08, #270c09);
+  color:white;
+}
+/* MAIN WRAPPER */
+.wrapper{
+   background:linear-gradient(135deg,#0f4c81,#00b894);
+flex:1;
+display:flex;
+padding:25px;
+gap:25px;
+}
+
+/* CENTER AREA */
+.main{
+  
+flex:1;
+}
+
+.resume-btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:10px 18px;
+  background:white;
+  color:#0f4c81;
+  font-weight:600;
+  border-radius:6px;
+  text-decoration:none;
+  transition:0.3s ease;
+}
+
+.resume-btn:hover{
+  background:#0f4c81;
+  color:white;
+}
+
+/* TOP SEARCH */
+.topbar{
+background:var(--white);
+padding:15px 20px;
+border-radius:12px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+margin-bottom:20px;
+}
+
+.topbar input{
+width:300px;
+padding:10px 15px;
+border-radius:8px;
+border:1px solid #ddd;
+}
+
+/* BANNER CARD */
+.banner{
+background:linear-gradient(135deg,var(--blue),var(--green));
+color:white;
+padding:30px;
+border-radius:15px;
+margin-bottom:25px;
+box-shadow:0 20px 40px rgba(0,0,0,0.1);
+}
+
+.banner h2{
+margin-bottom:10px;
+}
+
+.banner button{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+border-radius:8px;
+background:white;
+color:var(--blue);
+font-weight:600;
+cursor:pointer;
+}
+
+/* SECTION TITLE */
+.section-title{
+margin-bottom:15px;
+font-weight:600;
+color:white;
+}
+
+/* CONTINUE LEARNING CARDS */
+.learning{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+margin-bottom:25px;
+}
+
+.learning-card{
+  color:black;
+background:var(--white);
+padding:20px;
+border-radius:15px;
+box-shadow:0 15px 30px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.learning-card:hover{
+transform:translateY(-5px);
+}
+
+.progress-bar{
+height:8px;
+background:#eee;
+border-radius:20px;
+margin-top:10px;
+overflow:hidden;
+}
+
+.progress{
+height:100%;
+background:linear-gradient(90deg,var(--blue),var(--green));
+}
+
+/* SMALL CARDS (Continue Reading) */
+.small-cards{
+  color:black;
+display:flex;
+gap:15px;
+}
+
+.small-card{
+flex:1;
+background:var(--white);
+padding:15px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* RIGHT PANEL */
+.right-panel{
+width:300px;
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+/* ACTIVITY CARD */
+.activity-card{
+background:var(--white);
+padding:25px;
+border-radius:15px;
+box-shadow:0 15px 30px rgba(0,0,0,0.08);
+text-align:center;
+}
+
+.circle{
+width:120px;
+height:120px;
+border-radius:50%;
+background:conic-gradient(var(--green) 75%, #eee 25%);
+display:flex;
+align-items:center;
+justify-content:center;
+margin:15px auto;
+font-weight:700;
+color:var(--blue);
+}
+
+/* TODO CARD */
+.todo{
+background:var(--white);
+padding:20px;
+border-radius:15px;
+box-shadow:0 15px 30px rgba(0,0,0,0.08);
+}
+
+.todo-item{
+margin-bottom:15px;
+font-size:14px;
+}
+
+
+
+
+
+/* HAMBURGER */
+.hamburger{
+  display:none;
+  position:fixed;
+  top:15px;
+  left:15px;
+  font-size:28px;
+  color:white;
+  cursor:pointer;
+  z-index:1001;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 992px){
+
+  body{
+    flex-direction:column;
+  }
+
+  .hamburger{
+    color: black;
+    display:block;
+  }
+
+  .sidebar{
+    position:fixed;
+    left:-260px;
+    top:0;
+    height:100vh;
+    z-index:1000;
+    transition:0.4s ease;
+  }
+
+  .sidebar.active{
+    left:0;
+  }
+
+  .wrapper{
+    flex-direction:column;
+    padding:15px;
+  }
+
+  .right-panel{
+    width:100%;
+  }
+
+  .learning{
+    grid-template-columns:1fr;
+  }
+
+  .small-cards{
+    flex-direction:column;
+  }
+
+  .topbar{
+    flex-direction:column;
+    gap:10px;
+    align-items:flex-start;
+  }
+
+  .topbar input{
+    width:100%;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+<div class="hamburger">☰</div>
+<div class="sidebar">
+  <div class="logo-section">
+    <img src="images/images-removebg-preview.png" alt="Logo" class="sidebar-logo">
+  </div>
+
+  <div class="nav-item active">Dashboard</div>
+  <a href="quiz.html" class="nav-item">Quiz</a>
+  <a href="lost.html" class="nav-item">Lost and Found</a>
+ <a href="complainstudent.html" class="nav-item">Complaints</a>
+   <a href="Learn.html" class="nav-item">Learn</a>
+  <br><br><br><br><br><br><br><br><br><br><br><br>
+  <a href="index.html" class="Logout">Logout</a>
+</div>
+
+<div class="wrapper">
+
+<div class="main">
+
+<div class="topbar">
+<input type="text" placeholder="Search...">
+<div class="student-info">
+  <span class="student-name">Bismah Maher</span>
+  <img src="images/download (2).jpg" alt="Profile" class="profile-pic">
+</div>
+</div>
+
+<div class="banner">
+<h2>Quality Assurance Program</h2>
+<p>Master Manual & Automation Testing with real projects.</p>
+<a href="book.html" class="resume-btn">Resume Learning</a>
+</div>
+
+<h3 class="section-title">Progress</h3>
+<div class="learning">
+<div class="learning-card">
+<h4>Attendence</h4>
+<p>45/60 (Keep it up!)</p>
+<div class="progress-bar">
+<div class="progress" style="width:75%"></div>
+</div>
+</div>
+
+<div class="learning-card">
+<h4>Assignment </h4>
+<p>8/11  (Maintain assignments)</p>
+<div class="progress-bar">
+<div class="progress" style="width:40%"></div>
+</div>
+</div>
+</div>
+
+<h3 class="section-title">Mordern Web And App Development</h3>
+<div class="small-cards">
+<div class="small-card">Diverse Opportunities</div>
+<div class="small-card">Continuous Learning</div>
+<div class="small-card">Easier Deployment and Maintenance</div>
+</div>
+
+</div>
+
+<div class="right-panel">
+
+<div class="activity-card">
+<h3>Weekly Activity</h3>
+<div class="circle">75%</div>
+<p>Target Achieved</p>
+</div>
+
+<div class="todo">
+<h3>To-Do List</h3><br>
+<div class="todo-item">✔ Complete Assignment 3</div>
+<div class="todo-item">✔ Submit Assignment</div>
+<div class="todo-item">✔ Attend Live Session</div>
+<div class="todo-item">✔ Practice Test Cases</div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+<script>
+const hamburger = document.querySelector(".hamburger");
+const sidebar = document.querySelector(".sidebar");
+
+hamburger.addEventListener("click", () => {
+  sidebar.classList.toggle("active");
+});
+</script>
+</html>
+

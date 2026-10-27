@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Complaints</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+:root {
+    --bg-gradient: linear-gradient(135deg,#0f4c81,#00b894);
+    --sidebar-bg: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.95); /* Added */
+    --border-color: #dfe6e9; /* Added */
+    --text-muted: #636e72; /* Added */
+    --success: #2fbd50;
+    --danger: #c0392b;
+}
+*{
+  text-decoration: none;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
+}
+
+body{
+  display:flex;
+  background:var(--bg-gradient);
+  min-height:100vh;
+  color:var(--text-main);
+}
+
+   /* SIDEBAR */
+.sidebar {
+  background-color: var(--sidebar-bg);
+  width: 240px;
+  padding: 0 15px 20px 15px;
+  box-shadow: 5px 0 25px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+.sidebar-logo {
+  width: 180px; /* bigger logo */
+  display: block;
+  margin-top: -30px;
+}
+.logo-section{
+  text-align:center;
+  margin-bottom:8px;
+
+}
+.logo-text{
+  font-size:22px;
+  font-weight:700;
+  color:var(--blue);
+}
+.logo{
+font-size:22px;
+font-weight:700;
+color:var(--blue);
+margin-bottom:40px;
+}
+
+.nav-item{
+  color:black;
+padding:10px 15px;
+margin-bottom:6px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+font-weight:500;
+}
+
+.nav-item:hover,
+.nav-item.active{
+ background:linear-gradient(135deg,#0f4c81,#00b894);
+color:white;
+}
+.Logout {
+    color:black;
+padding:10px 15px;
+margin-bottom:6px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+font-weight:500;
+}
+.Logout:hover,
+.Logout:active{
+   background: linear-gradient(135deg, #cd1c08, #270c09);
+  color:white;
+}
+
+        /* --- MAIN CONTENT AREA --- */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .header-strip {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .dashboard-grid {
+            color: rgb(0, 0, 0);
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        /* --- CARDS --- */
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgb(58, 41, 41);
+            margin-bottom: 25px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* --- FORM STYLING --- */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        textarea { height: 100px; resize: none; }
+
+        .btn-submit {
+            background: var(--bg-gradient);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* --- TABLE STYLING --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        td {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        .status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            border-color: #270c09;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .status.resolved { background: #2fbd50; color:white; }
+        .status.pending { background: #fff9e6; color: #f39c12; }
+
+        /* --- ALERTS / WARNINGS --- */
+        .alert-item {
+            background: #fff5f5;
+            border-left: 5px solid var(--danger);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .alert-item h4 {
+            font-size: 0.95rem;
+            color: #c0392b;
+            margin-bottom: 5px;
+        }
+
+        .alert-item p {
+            font-size: 0.85rem;
+            color: #636e72;
+        }
+
+        .btn-action {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #0f4c81;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* Add these missing variables to your :root */
+
+
+/* Mobile Toggle Button Style */
+.mobile-toggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1100;
+    background: #0f4c81;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+
+@media (max-width: 992px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Stack columns for tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-toggle {
+        display: block; /* Show hamburger menu */
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -100%; /* Hide sidebar off-screen */
+        top: 0;
+        height: 100vh;
+        z-index: 1000;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        width: 260px;
+    }
+
+    /* Sidebar Slide-in Class */
+    .sidebar.active {
+        left: 0;
+    }
+
+    .main-content {
+        padding: 70px 15px 20px 15px; /* Space for the toggle button */
+    }
+
+    .header-strip {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+/* Specific Fixes for 515px and below */
+@media (max-width: 515px) {
+    .card form div[style*="display: flex"] {
+        flex-direction: column !important; /* Stack Title and Category */
+        gap: 0 !important;
+    }
+
+    .header-strip h1 {
+        font-size: 1.4rem;
+    }
+
+    /* Horizontal scroll for the table card only */
+    .card {
+        padding: 15px;
+    }
+    
+    .card:has(table) {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 500px; /* Forces scroll so table remains readable */
+    }
+
+    .btn-submit {
+        padding: 15px;
+        font-size: 1rem;
+    }
+}
+        
+    </style>
+</head>
+<body>
+
+    <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+
+           <div class="sidebar">
+  <div class="logo-section">
+    <img src="images/images-removebg-preview.png" alt="Logo" class="sidebar-logo">
+  </div>
+
+<a href="student.html" class="nav-item">Dashboard</a>
+ <a href="quiz.html"class="nav-item">Quiz</a>
+  <a href="lost.html" class="nav-item">Lost and Found</a>
+   <a href="complainstudent.html"class="nav-item active">Complaints</a>
+   <a href="learn.html"class="nav-item ">Learn</a>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <a href="index.html" class="Logout">Logout</a>
+</div>
+
+
+    <div class="main-content">
+        <div class="header-strip">
+            <h1>Student Support Portal</h1>
+            <p>Welcome back, Student | Dec 10, 2023</p>
+        </div>
+
+        <div class="dashboard-grid">
+            
+            <div class="left-col">
+                
+                <div class="card">
+                    <div class="card-title">Submit a New Case</div>
+                    <form>
+                        <div style="display: flex; gap: 15px;">
+                            <div class="form-group" style="flex: 2;">
+                                <label>Case Title</label>
+                                <input type="text" placeholder="Brief summary of the issue">
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label>Issue Category</label>
+                                <select>
+                                    <option>Course Issue</option>
+                                    <option>Facilities</option>
+                                    <option>Academic Staff</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Detailed Description</label>
+                            <textarea placeholder="Describe your concern in detail..."></textarea>
+                        </div>
+                        <button type="button" class="btn-submit">Submit Case</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Grievance Tracking</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date Submitted</th>
+                                <th>Category</th>
+                                <th>Title</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dec 10, 2023</td>
+                                <td>Academic</td>
+                                <td>Grade Recount Request</td>
+                                <td><span class="status resolved">Resolved</span></td>
+                            </tr>
+                            <tr>
+                                <td>Dec 08, 2023</td>
+                                <td>Facilities</td>
+                                <td>Lab AC Not Working</td>
+                                <td><span class="status pending">In Review</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="right-col">
+                <div class="card">
+                    <div class="card-title">Alerts & Important Notices</div>
+                    
+                    <div class="alert-item">
+                        <h4>Academic Standing</h4>
+                        <p>Your current GPA has triggered a secondary review. Please contact your advisor.</p>
+                        <a href="#" class="btn-action">VIEW DETAILS →</a>
+                    </div>
+
+                    <div class="alert-item">
+                        <h4>Attendance Warning</h4>
+                        <p>Multiple absences recorded in 'Advanced Mathematics'. Action required.</p>
+                        <a href="#" class="btn-action">SUBMIT EXCUSE →</a>
+                    </div>
+
+                    <div class="alert-item" style="background: #e1f5fe; border-left-color: #03a9f4;">
+                        <h4 style="color: #0277bd;">System Update</h4>
+                        <p>The student portal will be down for maintenance this Sunday at 2:00 AM.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggleBtn = document.querySelector('.mobile-toggle');
+        
+        sidebar.classList.toggle('active');
+
+        // Switch between hamburger and 'X' close icon
+        if (sidebar.classList.contains('active')) {
+            toggleBtn.innerHTML = '✕';
+        } else {
+            toggleBtn.innerHTML = '☰';
+        }
+    }
+
+    // Close sidebar when clicking a nav item (on mobile)
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                toggleSidebar();
+            }
+        });
+    });
+</script>
+</html>

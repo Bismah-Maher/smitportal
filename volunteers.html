@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title><style>
+
+
+:root{
+  --bg-gradient: linear-gradient(135deg,#0f4c81,#00b894);
+  --sidebar-bg:#ffffff;
+  --card-bg:#ffffff;
+  --text-main:#003a61;
+  --border-color:#e5e7eb;
+}
+
+*{
+    text-decoration: none;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
+}
+
+body{
+
+  margin:0;
+  display:flex;
+  min-height:100vh;
+  background:var(--bg-gradient);
+}
+
+          /* SIDEBAR */
+.sidebar {
+  background-color: var(--sidebar-bg);
+  width: 240px;
+  padding: 0 15px 20px 15px;
+  box-shadow: 5px 0 25px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+.sidebar-logo {
+  width: 180px; /* bigger logo */
+  display: block;
+  margin-top: -30px;
+}
+.logo-section{
+  text-align:center;
+  margin-bottom:8px;
+
+}
+.logo-text{
+  font-size:22px;
+  font-weight:700;
+  color:var(--blue);
+}
+.logo{
+font-size:22px;
+font-weight:700;
+color:var(--blue);
+margin-bottom:40px;
+}
+
+.nav-item{
+  color:black;
+padding:10px 15px;
+margin-bottom:6px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+font-weight:500;
+}
+
+.nav-item:hover,
+.nav-item.active{
+ background:linear-gradient(135deg,#0f4c81,#00b894);
+color:white;
+}
+.Logout {
+    color:black;
+padding:10px 15px;
+margin-bottom:6px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+font-weight:500;
+}
+.Logout:hover,
+.Logout:active{
+   background: linear-gradient(135deg, #cd1c08, #270c09);
+  color:white;
+}
+
+
+
+
+
+/* MAIN CONTENT */
+.main-content {
+  flex: 1;
+  padding: 30px;
+ 
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.page-header h2 {
+  color: white;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filters input,
+.filters select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+/* GRID */
+.volunteer-grid {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: var(--card-bg);
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-top img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  margin-left: 5px;
+}
+
+.available {
+  background: #e6f9f0;
+  color: #0f9d58;
+}
+
+.busy {
+  background: #fdecea;
+  color: #d93025;
+}
+
+.skills {
+  margin: 12px 0;
+}
+
+.skills span {
+  background: #eef2ff;
+  color: #3f51b5;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 12px;
+  margin-right: 5px;
+}
+
+.rating {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #555;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.primary {
+  background: linear-gradient(135deg,#0f4c81,#00b894);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.outline {
+  border: 1px solid #0f4c81;
+  color: #0f4c81;
+  background: transparent;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+
+
+
+/* BLUR EFFECT */
+body.blur {
+  overflow: hidden;
+}
+
+body.blur .main-content,
+body.blur .sidebar {
+  filter: blur(5px);
+}
+
+/* MODAL */
+.profile-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.profile-modal.active {
+  display: flex;
+}
+
+.profile-card {
+  background: white;
+  width: 400px;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.profile-info {
+  margin: 15px 0;
+  text-align: left;
+}
+
+
+
+
+/* CONTACT MODAL */
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.contact-modal.active {
+  display: flex;
+}
+
+.contact-card {
+  background: white;
+  width: 420px;
+  padding: 25px;
+  border-radius: 15px;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  animation: pop 0.3s ease;
+}
+
+.contact-card h3 {
+  margin-bottom: 15px;
+}
+
+.contact-input,
+.contact-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.contact-textarea {
+  height: 100px;
+  resize: none;
+}
+
+.send-btn {
+  width: 100%;
+}
+
+
+/* SUCCESS POPUP */
+.success-popup {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg,#0f4c81,#00b894);
+  color: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.4s ease;
+  z-index: 2000;
+}
+
+.success-popup.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* HAMBURGER */
+.hamburger{
+  display:none;
+  position:fixed;
+  top:15px;
+  right:15px;
+  left:auto;
+  font-size:28px;
+  color:rgb(255, 255, 255);
+  cursor:pointer;
+  z-index:1100;
+}
+
+
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media screen and (max-width: 992px){
+
+  body{
+    flex-direction:column;
+  }
+
+  /* Show hamburger */
+  .hamburger{
+    display:block;
+  }
+
+  /* Sidebar slide from right */
+  .sidebar{
+    position:fixed;
+    top:0;
+    right:-260px;
+    left:auto;
+    height:100vh;
+    width:240px;
+    background:#ffffff; /* keep solid white */
+    z-index:1000;
+    transition:right .4s ease;
+  }
+
+  .sidebar.active{
+    right:0;
+  }
+
+  /* Main spacing */
+  .main-content{
+    padding:25px 15px;
+  }
+
+  /* Header responsive */
+  .page-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+  }
+
+  .filters{
+    width:100%;
+    flex-direction:column;
+  }
+
+  .filters input,
+  .filters select{
+    width:100%;
+  }
+
+  /* Cards full width */
+  .volunteer-grid{
+    grid-template-columns:1fr;
+  }
+
+  /* Modal resize */
+  .profile-card,
+  .contact-card{
+    width:90%;
+  }
+}
+    </style>
+</head>
+<body>
+  <div class="hamburger">☰</div>
+    
+<div class="sidebar">
+  <div class="logo-section">
+    <img src="images/images-removebg-preview.png" alt="Logo" class="sidebar-logo">
+  </div>
+
+<a href="admin.html" class="nav-item">Dashboard</a>
+ <a href="complaints.html"class="nav-item ">Complaints</a>
+  <a href="adminlost.html" class="nav-item">Lost and Found</a>
+  <a href="volunteers.html" class="nav-item active">Volunteers</a>
+  <a href="notifications.html" class="nav-item">Notifications</a>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <a href="index.html" class="Logout">Logout</a>
+</div>
+
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+  <div class="page-header">
+    <h2>Available Volunteers</h2>
+
+    <div class="filters">
+      <input type="text" placeholder="Search volunteers by name, skill..." />
+
+      <select>
+        <option>All Subjects</option>
+        <option>Web and App</option>
+        <option>Graphic</option>
+        <option>AI</option>
+        <option>Video editing</option>
+        <option>Cybersecurity</option>
+        <option>UI/UX Design with AI</option>
+        <option>E-Commerce & Shopify</option>
+        <option>Python & TypeScript Programming</option>
+        <option>Computer Based Accounting.</option>
+        <option>Technical and Vocational</option>
+      </select>
+
+      <select>
+        <option>Availability</option>
+        <option>Available</option>
+        <option>Busy</option>
+      </select>
+
+      <select>
+        <option>Sort By</option>
+        <option>Rating</option>
+        <option>Experience</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="volunteer-grid">
+
+    <!-- CARD 1 -->
+    <div class="card">
+      <div class="card-top">
+        <img src="adpic/diana avel.jpg">
+        <div>
+          <h4>Manaheel Jamil</h4>
+          <span class="badge available">Available</span>
+        </div>
+      </div>
+
+      <div class="skills">
+        <span>Web and App</span>
+        <span>Graphic</span>
+        <span>Data Science</span>
+      </div>
+
+      <p>Empowering students in Web and app for about 10+ years.</p>
+
+      <div class="rating">⭐ 4.9/5 | 112 reviews</div>
+
+      <div class="buttons">
+
+        <button class="primary" onclick="openContact('Manaheel Jamil')">
+  Contact
+</button>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card">
+      <div class="card-top">
+        <img src="adpic/download (1).jpg">
+        <div>
+          <h4>Emily George</h4>
+          <span class="badge available">Available</span>
+        </div>
+      </div>
+
+      <div class="skills">
+        <span>Cybersecurity</span>
+        <span>Maths</span>
+      </div>
+
+      <p>Helping students understand Maths clearly and simply.</p>
+
+      <div class="rating">⭐ 4.8/5 | 89 reviews</div>
+
+     <div class="buttons">
+  
+        <button class="primary" onclick="openContact('Emily George')">
+  Contact
+</button>
+      </div>
+    </div>
+
+
+
+
+
+     <!-- CARD 3 -->
+    <div class="card">
+      <div class="card-top">
+        <img src="adpic/download (6).jpg">
+        <div>
+          <h4>Areesha Ali</h4>
+          <span class="badge available">Available</span>
+        </div>
+      </div>
+
+      <div class="skills">
+        <span>AI</span>
+        <span>Graphic</span>
+      </div>
+
+      <p>Empowering young minds in web and app development for over a decade.</p>
+
+      <div class="rating">⭐ 3.8/5 | 90 reviews</div>
+
+      <div class="buttons">
+  
+        <button class="primary" onclick="openContact('Areesha Ali')">
+  Contact
+</button>
+      </div>
+    </div>
+
+
+
+     <!-- CARD 4-->
+    <div class="card">
+      <div class="card-top">
+        <img src="adpic/Credit_ @sadiara494.jpg">
+        <div>
+          <h4>Bushra Azher</h4>
+          <span class="badge available">Available</span>
+        </div>
+      </div>
+
+      <div class="skills">
+        <span>AI</span>
+        <span>Video editing</span>
+      </div>
+
+      <p>Guiding students from basics to professional-level development.</p>
+
+      <div class="rating">⭐ 4.7/5 | 46 reviews</div>
+
+      <div class="buttons">
+
+        <button class="primary" onclick="openContact('Bushra Azher')">
+  Contact
+</button>
+      </div>
+    </div>
+
+
+
+
+     <!-- CARD 5 -->
+    <div class="card">
+      <div class="card-top">
+        <img src="adpic/beren.jpg">
+        <div>
+          <h4>Ramsha Khan</h4>
+          <span class="badge available">Available</span>
+        </div>
+      </div>
+
+      <div class="skills">
+        <span>Computer based Accounting<span>
+        <span>Biology</span>
+      </div>
+
+      <p>Over 10 years of transforming beginners into confident developers.</p>
+
+      <div class="rating">⭐ 4.9/5 | 99 reviews</div>
+
+      <div class="buttons">
+
+        <button class="primary" onclick="openContact('Ramsha Khan')">
+  Contact
+</button>
+      </div>
+    </div>
+
+
+     <!-- CARD 6 -->
+    <div class="card">
+      <div class="card-top">
+        <img src="adpic/pop.jpg">
+        <div>
+          <h4>Anila Rehman</h4>
+          <span class="badge busy">Busy</span>
+        </div>
+      </div>
+
+      <div class="skills">
+        <span>UI/UX</span>
+        <span>Technical and Vocational<span>
+      </div>
+
+      <p>Cultivating problem-solvers through hands-on coding education.</p>
+
+      <div class="rating">⭐ 4.8/5 | 89 reviews</div>
+
+      <div class="buttons">
+
+        <button class="primary" onclick="openContact('Anila Rehman')">
+  Contact
+</button>
+      </div>
+    </div>
+
+
+
+
+ <!-- CARD 7 -->
+    <div class="card">
+      <div class="card-top">
+        <img src="adpic/download.jpg">
+        <div>
+          <h4>Fazila Wahid</h4>
+          <span class="badge available">Available</span>
+        </div>
+      </div>
+
+      <div class="skills">
+        <span>Web and App</span>
+        <span>Cybersecurity</span>
+        <span>AI</span>
+      </div>
+
+      <p>Mentoring future app developers with passion and experience.</p>
+
+      <div class="rating">⭐ 5/5 | 100 reviews</div>
+
+      <div class="buttons">
+      
+        <button class="primary" onclick="openContact('Fazila Wahid')">
+  Contact
+</button>
+      </div>
+    </div>
+
+
+
+
+     <!-- CARD 8 -->
+    <div class="card">
+      <div class="card-top">
+        <img src="adpic/Emma Laui.jpg">
+        <div>
+          <h4>Umaima Marvi</h4>
+          <span class="badge available">Available</span>
+        </div>
+      </div>
+
+      <div class="skills">
+        <span>Cybersecurity<span>
+        <span>UI/UX</span>
+      </div>
+
+      <p>Equipping students with practical skills for the modern web.</p>
+
+      <div class="rating">⭐ 4.2/5 | 89 reviews</div>
+
+      <div class="buttons">
+      
+        <button class="primary" onclick="openContact('Umaima Marvi')">
+  Contact
+</button>
+      </div>
+    </div>
+
+
+
+     <!-- CARD 9 -->
+    <div class="card">
+      <div class="card-top">
+        <img src="adpic/download (4).jpg">
+        <div>
+          <h4>Javeria Ali</h4>
+          <span class="badge available">Available</span>
+        </div>
+      </div>
+
+      <div class="skills">
+        <span>Maths</span>
+        <span>AI</span>
+        <span>Data Science</span>
+      </div>
+
+      <p>From classroom lessons to real-world digital solutions.</p>
+
+      <div class="rating">⭐ 4.9/5 | 89 reviews</div>
+
+      <div class="buttons">
+     
+        <button class="primary" onclick="openContact('Javeria Ali')">
+  Contact
+</button>
+      </div>
+    </div>
+
+
+
+    
+  </div>
+</div>
+
+
+<!-- CONTACT MODAL -->
+<div class="contact-modal" id="contactModal">
+  <div class="contact-card">
+
+    <span class="close-btn" onclick="closeContact()">×</span>
+
+    <h3>Contact <span id="volunteerName"></span></h3>
+
+    <input type="text" placeholder="Your Name" class="contact-input">
+    <input type="email" placeholder="Your Email" class="contact-input">
+    <textarea placeholder="Write your message..." class="contact-textarea"></textarea>
+
+   <button class="primary send-btn" onclick="sendMessage()">
+  Send Message
+</button>
+
+  </div>
+</div>
+
+
+<!-- SUCCESS POPUP -->
+<div class="success-popup" id="successPopup">
+  ✅ Your message has been sent via Email!
+</div>
+</body>
+
+<script>
+function openProfile() {
+  document.getElementById("profileModal").classList.add("active");
+  document.body.classList.add("blur");
+}
+
+function closeProfile() {
+  document.getElementById("profileModal").classList.remove("active");
+  document.body.classList.remove("blur");
+}
+
+
+
+// PROFILE MODAL
+function openProfile() {
+  document.getElementById("profileModal").classList.add("active");
+  document.body.classList.add("blur");
+}
+
+function closeProfile() {
+  document.getElementById("profileModal").classList.remove("active");
+  document.body.classList.remove("blur");
+}
+
+// CONTACT MODAL
+function openContact(name) {
+  document.getElementById("contactModal").classList.add("active");
+  document.getElementById("volunteerName").innerText = name;
+  document.body.classList.add("blur");
+}
+
+function closeContact() {
+  document.getElementById("contactModal").classList.remove("active");
+  document.body.classList.remove("blur");
+}
+
+// CLOSE WHEN CLICKING OUTSIDE
+window.onclick = function(e) {
+  const contactModal = document.getElementById("contactModal");
+  const profileModal = document.getElementById("profileModal");
+
+  if (e.target === contactModal) {
+    closeContact();
+  }
+
+  if (e.target === profileModal) {
+    closeProfile();
+  }
+};
+
+function sendMessage() {
+
+  // Close contact modal
+  closeContact();
+
+  // Clear inputs
+  document.querySelectorAll(".contact-input, .contact-textarea")
+    .forEach(input => input.value = "");
+
+  // Show success popup
+  const popup = document.getElementById("successPopup");
+  popup.classList.add("show");
+
+  // Hide after 3 seconds
+  setTimeout(() => {
+    popup.classList.remove("show");
+  }, 3000);
+}
+
+
+const hamburger = document.querySelector(".hamburger");
+const sidebar = document.querySelector(".sidebar");
+
+hamburger.addEventListener("click", () => {
+  sidebar.classList.toggle("active");
+});
+</script>
+</html>
